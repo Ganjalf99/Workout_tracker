@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/macro_chart"
+        android:icon="@drawable/ic_pie"
+        android:title="Macro Chart"/>
+    <item
+        android:id="@+id/add_food"
+        android:icon="@drawable/ic_addfood"
+        android:title="Add Food"/>
+
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile"/>
+
+
+</menu>

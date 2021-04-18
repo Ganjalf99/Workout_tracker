@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/statistics"
+        android:icon="@drawable/ic_bar_graph"
+        android:title="Statistics"/>
+    <item
+        android:id="@+id/new_workout"
+        android:icon="@drawable/ic_add_workout"
+        android:title="New Training"
+        />
+    <item
+        android:id="@+id/start_workout"
+        android:icon="@drawable/ic_baseline_not_started_24"
+        android:title="Start Workout"/>
+
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile"/>
+
+
+</menu>
