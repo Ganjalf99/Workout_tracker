@@ -17,7 +17,7 @@
 
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profile_exercise"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="Profile"/>
 
