@@ -34,10 +34,12 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         //val drawerListener = DrawerListener()
         //val bottomlistener = BottomListener()
+        //all 'avvio dell'app mi posiziono sullo start workout
         bottom_nav.selectedItemId = R.id.start_workout
         supportFragmentManager.commit { setReorderingAllowed(true)
             replace<StartWorkoutFragment>(R.id.main_fragment)
         }
+        //listener per il drawer menu
         nav_view.setNavigationItemSelectedListener(object  : NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 bottom_nav.menu.clear()
@@ -60,8 +62,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+        //listener per i bottom menu
         bottom_nav.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                //cambio il fragment inbase alla icona clicata
                 when(item.itemId){
                     R.id.statistics ->  supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<StatisticsFragment>(R.id.main_fragment)
