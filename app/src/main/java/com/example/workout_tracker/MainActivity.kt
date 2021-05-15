@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+
     }
     private fun changeMenu(menu : Int,defoultItem:Int){
         bottom_nav.inflateMenu(menu)
