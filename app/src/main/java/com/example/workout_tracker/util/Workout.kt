@@ -2,9 +2,11 @@ package com.example.workout_tracker.util
 
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
 import java.lang.Exception
+import java.util.*
 
 class Workout(var nome: String){
     var exerciseList = mutableListOf<Exercise>()
+     var lastRun : Date? = null
 
 
     fun addExercise(exercise: Exercise) :Boolean{

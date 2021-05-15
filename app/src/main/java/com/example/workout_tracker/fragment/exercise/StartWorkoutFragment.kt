@@ -1,11 +1,13 @@
 package com.example.workout_tracker.fragment.exercise
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
@@ -47,6 +49,13 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
         }
 
         list_view_workouts.adapter= ListAdapter(this.context,workoutList)
+        list_view_workouts.setOnItemClickListener ( object : AdapterView.OnItemClickListener{
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                Log.d(null,"$position")
+            }
+
+        } )
 
     }
 

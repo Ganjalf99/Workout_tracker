@@ -5,11 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
 import android.view.ViewGroup.LayoutParams;
+import android.widget.*
 import com.example.workout_tracker.R
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
@@ -31,12 +28,12 @@ class ListAdapter(private val context: Context?, private val data: MutableList<W
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
-        var i =0
+
         var newView = convertView
         if( newView== null){
             newView = LayoutInflater.from(context).inflate(R.layout.list_view_item,null)
         }
-        val  linearLayout :LinearLayout =  newView!!.findViewById(R.id.linear_layout)
+       val  linearLayout :LinearLayout =  newView!!.findViewById(R.id.linear_layout)
         if(newView != null){
 
             val txtNomeWorkout: TextView= newView.findViewById(R.id.txtNomeWorkout)
@@ -52,7 +49,8 @@ class ListAdapter(private val context: Context?, private val data: MutableList<W
             linearLayout.addView(textView)
 
         }
-
+        val btn : ImageButton = newView.findViewById(R.id.imageButton2)
+        btn.setOnClickListener { Log.d(null,"bottone") }
 
 
         return newView

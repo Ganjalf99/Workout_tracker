@@ -6,12 +6,16 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="20dp"
     app:strokeColor="@color/prymary"
-    app:strokeWidth="1dp">
+    app:strokeWidth="1dp"
+    android:background="@drawable/two_state_button"
+    android:descendantFocusability="blocksDescendants">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
+        android:background="@drawable/two_state_button"
+
        >
 
         <TextView
@@ -21,27 +25,35 @@
             android:text="TextView"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/prymary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/imageButton2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_baseline_play_arrow_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:soundEffectsEnabled="true"/>
+            app:srcCompat="@drawable/ic_baseline_play_arrow_24"
+            android:background="@drawable/two_state_button"
+
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+            />
 
         <LinearLayout
             android:id="@+id/linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNomeWorkout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/txtNomeWorkout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
