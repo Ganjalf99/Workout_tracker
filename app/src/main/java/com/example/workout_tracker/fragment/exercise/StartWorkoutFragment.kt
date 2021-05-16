@@ -37,11 +37,17 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
         var es1 = Exercise("squat,",2,10,120)
         var es2 = Exercise("curlbilli,",3,12,120)
         var es3 = Exercise("pancaPiana,",5,4,120)
+        var es4 = Exercise("squasat,",2,10,120)
+        var es5 = Exercise("squsdsat,",2,10,120)
         try {
             workout.addExercise(es2)
             workout.addExercise(es1)
+            workout.addExercise(es4)
+            workout.addExercise(es5)
             workout.addExercise(es3)
             workout2.addExercise(es3)
+            workout2.addExercise(es2)
+
             workoutList.add(workout)
             workoutList.add(workout2)
         }catch (e  : ExerciseAlreadyInListException){
@@ -51,7 +57,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
         list_view_workouts.adapter= ListAdapter(this.context,workoutList)
         list_view_workouts.setOnItemClickListener ( object : AdapterView.OnItemClickListener{
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                /*creare activity modifica*/
                 Log.d(null,"$position")
             }
 

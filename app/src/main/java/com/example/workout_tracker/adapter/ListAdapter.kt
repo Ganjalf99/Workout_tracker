@@ -33,7 +33,6 @@ class ListAdapter(private val context: Context?, private val data: MutableList<W
         if( newView== null){
             newView = LayoutInflater.from(context).inflate(R.layout.list_view_item,null)
         }
-       val  linearLayout :LinearLayout =  newView!!.findViewById(R.id.linear_layout)
         if(newView != null){
 
             val txtNomeWorkout: TextView= newView.findViewById(R.id.txtNomeWorkout)
@@ -41,18 +40,26 @@ class ListAdapter(private val context: Context?, private val data: MutableList<W
             txtNomeWorkout.text =data[position].nome
         }
 
-        data[position].exerciseList.forEach{ exe->
-            var exercise:Exercise = exe
-            var textView : TextView = TextView(this.context)
-            textView.text ="${exercise.serie} x ${exercise.ripetizioni} ${exercise.nome}"
-            textView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
-            linearLayout.addView(textView)
+        fillWorkout(position,newView)
 
-        }
-        val btn : ImageButton = newView.findViewById(R.id.imageButton2)
-        btn.setOnClickListener { Log.d(null,"bottone") }
+
+        val btn : ImageButton = newView!!.findViewById(R.id.imageButton2)
+        val btn2 : ImageButton = newView!!.findViewById(R.id.imageButton3)
+        btn.setOnClickListener { Log.d(null,"bottone avvio"/*creare activyty avvio*/) }
+        btn2.setOnClickListener { Log.d(null,"bottone stop") }
 
 
         return newView
+    }
+    private fun fillWorkout( position: Int, newView : View?){
+        val  linearLayout :LinearLayout =  newView!!.findViewById(R.id.linear_layout)
+
+        data[position].exerciseList.forEach { exe ->
+            var exercise: Exercise = exe
+            var textView: TextView = TextView(this.context)
+            textView.text = "${exercise.serie} x ${exercise.ripetizioni} ${exercise.nome}"
+            textView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            linearLayout.addView(textView)
+        }
     }
 }

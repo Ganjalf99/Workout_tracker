@@ -26,6 +26,7 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         android:background="@color/trans"
+        android:listSelector="@color/trans"
 
         />
 

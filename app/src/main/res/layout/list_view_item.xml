@@ -7,14 +7,14 @@
     app:cardCornerRadius="20dp"
     app:strokeColor="@color/prymary"
     app:strokeWidth="1dp"
-    android:background="@drawable/two_state_button"
+    android:background="?selectableItemBackgroundBorderless"
     android:descendantFocusability="blocksDescendants">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:background="@drawable/two_state_button"
+        android:background="?selectableItemBackgroundBorderless"
 
        >
 
@@ -33,15 +33,29 @@
             android:id="@+id/imageButton2"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="0dp"
+
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_baseline_play_arrow_24"
-            android:background="@drawable/two_state_button"
+            app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
-            android:padding="0dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="5dp"
+
             android:scaleType="fitCenter"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageButton2"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/ic_baseline_delete_24" />
 
         <LinearLayout
             android:id="@+id/linear_layout"
