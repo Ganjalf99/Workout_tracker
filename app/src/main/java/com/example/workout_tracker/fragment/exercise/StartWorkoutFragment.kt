@@ -2,16 +2,19 @@ package com.example.workout_tracker.fragment.exercise
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
 import com.example.workout_tracker.R
+import com.example.workout_tracker.WorkoutActivity
 import com.example.workout_tracker.adapter.ListAdapter
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
@@ -58,7 +61,12 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
         list_view_workouts.setOnItemClickListener ( object : AdapterView.OnItemClickListener{
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 /*creare activity modifica*/
+
                 Log.d(null,"$position")
+                parent!!.getItemAtPosition(position)
+                var workout= parent!!.getItemAtPosition(position) as Workout
+                Log.d(null,"${workout.nome}")
+
             }
 
         } )

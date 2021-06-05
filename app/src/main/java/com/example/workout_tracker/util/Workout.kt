@@ -1,12 +1,14 @@
 package com.example.workout_tracker.util
 
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
+import java.io.Serializable
 import java.lang.Exception
+import java.time.LocalDate.now
 import java.util.*
 
-class Workout(var nome: String){
+class Workout(var nome: String) : Serializable{
     var exerciseList = mutableListOf<Exercise>()
-     var lastRun : Date? = null
+     var lastRun : Date? = Date()
 
 
     fun addExercise(exercise: Exercise) :Boolean{
@@ -22,7 +24,7 @@ class Workout(var nome: String){
     }
 
     override fun toString(): String {
-        var string :String = "$nome \n"
+        var string :String = "$nome \n $lastRun \n"
         exerciseList.forEach{elem -> string =  string.plus(elem.toString()+"\n")}
         return string
     }
