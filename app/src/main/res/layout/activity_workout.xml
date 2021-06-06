@@ -36,6 +36,8 @@
                 android:text="TextView"
                 android:textSize="32sp"
                 android:textStyle="bold|italic" />
+
+
         </LinearLayout>
 
     </ScrollView>
