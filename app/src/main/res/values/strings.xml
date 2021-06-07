@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="add_workout_button">Add new Workout</string>
     <string name="yours_workout">YOURS WORKOUTS:</string>
+    <string name="sign_in_with_google">Login with Google</string>
+    <string name="example">Exemple</string>
+    <string name="id">ID:</string>
+    <string name="name">Name:</string>
+    <string name="email_address">Email address:</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

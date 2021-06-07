@@ -38,16 +38,19 @@ class WorkoutActivity : AppCompatActivity(){
                     setSerieLayout(i)
                 }
         }
-        setCompleteButton()
+        setCompleteButton(workout)
 
     }
-    fun btnFinishClick() {
+    fun btnFinishClick(workout: Workout) {
        /* Log.d(null, "lel")
         var linearLayout = linear_layout_vertical.getChildAt(1) as LinearLayout
         var textView = linearLayout.getChildAt(0) as TextView
         Log.d(null, "${textView.text}")*/
+        
+       // workout.exerciseList[3].addExecution()
+
     }
-    fun setCompleteButton(){
+    fun setCompleteButton(workout: Workout){
         val button : MaterialButton = MaterialButton(this,)
 
         button.text = "Completato"
@@ -56,7 +59,7 @@ class WorkoutActivity : AppCompatActivity(){
         button.gravity = Gravity.CENTER
         button.textSize = 24f
         button.setPadding(30)
-        button.setOnClickListener {btnFinishClick() }
+        button.setOnClickListener {btnFinishClick(workout) }
 
         linear_layout_vertical.addView(button)
     }
@@ -87,8 +90,9 @@ class WorkoutActivity : AppCompatActivity(){
         textInputLayout
 
         var editText = TextInputEditText(textInputLayout.context)
-        editText.inputType = InputType.TYPE_CLASS_NUMBER
-        editText.filters += InputFilter.LengthFilter(2)
+
+        editText.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
+        editText.filters += InputFilter.LengthFilter(4)
         textInputLayout.setPadding(25,0,25,0)
         textInputLayout.addView(editText, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
@@ -100,8 +104,8 @@ class WorkoutActivity : AppCompatActivity(){
         textInputLayout2.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
         textInputLayout2.hint ="Kg"
         var editText2 = TextInputEditText(textInputLayout2.context)
-        editText2.inputType = InputType.TYPE_CLASS_NUMBER
-        editText2.filters += InputFilter.LengthFilter(3)
+        editText2.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL )
+        editText2.filters += InputFilter.LengthFilter(6)
         textInputLayout2.setPadding(25,0,25,0)
         textInputLayout2.addView(editText2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
