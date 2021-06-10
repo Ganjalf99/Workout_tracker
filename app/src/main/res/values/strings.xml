@@ -11,4 +11,10 @@
     <string name="name">Name:</string>
     <string name="email_address">Email address:</string>
     <string name="sign_out">Sign Out</string>
+    <string name="inserisci_nome_workout">Inserisci Nome Workout</string>
+    <string name="inserisci_numero_esercizi">Inserisci Numero Esercizi</string>
+    <string name="es_allenamento_petto">Es: Allenamento Petto</string>
+    <string name="continua">Continua</string>
+    <string name="errore_inserisci_nome">Inserisci il nome dell\' allenamento</string>
+    <string name="errore_inserisci_numero_esercizi">Inserisci il numero degli esercizi</string>
 </resources>

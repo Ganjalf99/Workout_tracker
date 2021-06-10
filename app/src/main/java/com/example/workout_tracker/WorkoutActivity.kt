@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.*
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginLeft
 import androidx.core.view.setPadding
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
@@ -58,7 +59,7 @@ class WorkoutActivity : AppCompatActivity(){
         button.layoutParams = params
         button.gravity = Gravity.CENTER
         button.textSize = 24f
-        button.setPadding(30)
+        button.setPadding(50)
         button.setOnClickListener {btnFinishClick(workout) }
 
         linear_layout_vertical.addView(button)
@@ -82,8 +83,9 @@ class WorkoutActivity : AppCompatActivity(){
         textView2.textSize = 18f
 
         var textInputLayout = TextInputLayout(this)
-        textInputLayout.layoutParams = LinearLayout.LayoutParams(300, LinearLayout.LayoutParams.WRAP_CONTENT)
+        textInputLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
         textInputLayout.boxBackgroundColor = Color.TRANSPARENT
+
         textInputLayout.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
         textInputLayout.hint = "N°Rep"
         textInputLayout.boxStrokeColor = Color.RED
@@ -93,12 +95,12 @@ class WorkoutActivity : AppCompatActivity(){
 
         editText.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
         editText.filters += InputFilter.LengthFilter(4)
-        textInputLayout.setPadding(25,0,25,0)
+        textInputLayout.setPadding(50,0,50,0)
         textInputLayout.addView(editText, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
 
         var textInputLayout2 = TextInputLayout(this)
-        textInputLayout2.layoutParams = LinearLayout.LayoutParams(300, LinearLayout.LayoutParams.WRAP_CONTENT)
+        textInputLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1F)
         textInputLayout2.boxStrokeColor = Color.RED
         textInputLayout2.boxBackgroundColor = Color.TRANSPARENT
         textInputLayout2.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
@@ -106,11 +108,12 @@ class WorkoutActivity : AppCompatActivity(){
         var editText2 = TextInputEditText(textInputLayout2.context)
         editText2.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL )
         editText2.filters += InputFilter.LengthFilter(6)
-        textInputLayout2.setPadding(25,0,25,0)
+
+        textInputLayout2.setPadding(50,0,50,0)
         textInputLayout2.addView(editText2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
         var checkBox :CheckBox = CheckBox(this)
-        checkBox.setPadding(70)
+        checkBox.setPadding(50,0,0,0)
         checkBox.setOnClickListener {
             if(checkBox.isChecked){
                 linearLayout.setBackgroundColor(Color.GREEN)

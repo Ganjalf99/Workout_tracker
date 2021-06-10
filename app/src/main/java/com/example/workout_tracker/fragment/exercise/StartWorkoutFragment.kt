@@ -35,9 +35,9 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var workoutList = mutableListOf<Workout>()
-        var workout = Workout("Petto/bicipiti")
-        var workout2 = Workout("schiena/tricipiti")
-        var es1 = Exercise("SQUAT",2,10,120)
+        var workout = Workout("PETTO/BICIPITI")
+        var workout2 = Workout("SCHIENA/TRICIPITIAAAAAAAA")
+        var es1 = Exercise("SQUATAAAAAAAAAAAAAAA",2,10,120)
         var es2 = Exercise("PANCA PIANA",3,12,120)
         var es3 = Exercise("LEG CURL",5,4,120)
         var es4 = Exercise("LEG PRESS",2,10,120)

@@ -13,16 +13,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.example.workout_tracker.fragment.SettingsFragment
-import com.example.workout_tracker.fragment.exercise.ExerciseProfileFragment
-import com.example.workout_tracker.fragment.exercise.NewTrainingFragment
-import com.example.workout_tracker.fragment.exercise.StartWorkoutFragment
-import com.example.workout_tracker.fragment.exercise.StatisticsFragment
+import com.example.workout_tracker.fragment.exercise.*
 import com.example.workout_tracker.fragment.food.AddFoodFragment
 import com.example.workout_tracker.fragment.food.FoodProfilefragment
 import com.example.workout_tracker.fragment.food.MacroChartFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_newtraining.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         val toggle = ActionBarDrawerToggle(this, drawer_layout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
         //val drawerListener = DrawerListener()
         //val bottomlistener = BottomListener()
         //all 'avvio dell'app mi posiziono sullo start workout
@@ -120,5 +119,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun btnContinua( v:View){
+        val txtNomeWorkout = txt_nome_workout.text.toString()
+        val numeroEsercizi  = txt_numero_esercizi.text.toString()
 
+        if (txtNomeWorkout == ""){
+            txt_nome_workout.error = "Inserisci un Valore"
+        }else if (numeroEsercizi == ""){
+            txt_numero_esercizi.error = "Inserisci un Valore"
+        }else{
+            Log.d(null,txtNomeWorkout)
+            Log.d(null,numeroEsercizi.toString())
+            supportFragmentManager.commit { setReorderingAllowed(true)
+                replace<NewTrainingFragment2>(R.id.main_fragment)
+            }
+        }
+
+
+
+
+
+
+
+    }
 }

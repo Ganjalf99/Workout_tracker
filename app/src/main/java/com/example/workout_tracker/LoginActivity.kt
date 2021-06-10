@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
+import com.example.workout_tracker.fragment.exercise.StatisticsFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -84,6 +85,7 @@ class LoginActivity :AppCompatActivity() {
                         Log.w(TAG, "signInWithCredential:failure", task.exception)
 
                     }
+
                 }
     }
 }
