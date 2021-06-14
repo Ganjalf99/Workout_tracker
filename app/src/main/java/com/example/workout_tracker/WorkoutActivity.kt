@@ -54,7 +54,7 @@ class WorkoutActivity : AppCompatActivity(){
     fun setCompleteButton(workout: Workout){
         val button : MaterialButton = MaterialButton(this,)
 
-        button.text = "Completato"
+        button.text = getString(R.string.fatto)
         val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         button.layoutParams = params
         button.gravity = Gravity.CENTER

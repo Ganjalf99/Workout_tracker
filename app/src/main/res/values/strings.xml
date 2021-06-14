@@ -17,4 +17,7 @@
     <string name="continua">Continua</string>
     <string name="errore_inserisci_nome">Inserisci il nome dell\' allenamento</string>
     <string name="errore_inserisci_numero_esercizi">Inserisci il numero degli esercizi</string>
+    <string name="inserisci_un_valore">Inserisci un Valore</string>
+    <string name="inserisci_esercizi">inserisci qui i tuoi esercizi</string>
+    <string name="fatto">Fatto!</string>
 </resources>

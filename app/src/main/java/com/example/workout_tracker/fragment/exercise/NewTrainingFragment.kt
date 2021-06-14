@@ -21,12 +21,12 @@ class NewTrainingFragment: Fragment(R.layout.fragment_newtraining){
 
     override fun onCreateView(inflater:   LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return super.onCreateView(inflater, container, null)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, null)
 
 
 

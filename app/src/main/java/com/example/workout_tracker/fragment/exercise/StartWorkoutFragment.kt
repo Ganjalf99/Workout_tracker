@@ -76,7 +76,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
         mUserReference.child(idUser!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d(TAG, "\n \n \n ")
+
                 snapshot.children.forEach { workoutList.add(createWorkoutFromList(it) )  }
                 listAdapter.notifyDataSetChanged()
 
