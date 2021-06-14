@@ -16,7 +16,7 @@ import com.example.workout_tracker.util.Workout
 import kotlinx.android.synthetic.main.list_view_item.*
 
 
-class ListAdapter(private val context: Context?, private val data: MutableList<Workout>): BaseAdapter() {
+class ListAdapter(private val context: Context?, private val data: ArrayList<Workout>): BaseAdapter() {
     override fun getCount(): Int {
         return data.size
     }
@@ -40,7 +40,7 @@ class ListAdapter(private val context: Context?, private val data: MutableList<W
 
             val txtNomeWorkout: TextView= newView.findViewById(R.id.txtNomeWorkout)
             val txtLastDate: TextView= newView.findViewById(R.id.txtLastDate)
-            txtLastDate.text = data[position].lastRun.toString()
+            //txtLastDate.text = data[position].lastRun.toString()
             txtNomeWorkout.text =data[position].nome
         }
 

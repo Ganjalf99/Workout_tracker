@@ -1,31 +1,37 @@
 package com.example.workout_tracker.fragment.exercise
 
 
-import android.content.Context
-import android.content.Intent
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
 import com.example.workout_tracker.R
-import com.example.workout_tracker.WorkoutActivity
 import com.example.workout_tracker.adapter.ListAdapter
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_exerciseprofile.*
 import kotlinx.android.synthetic.main.fragment_startworkout.*
 import kotlinx.android.synthetic.main.list_view_item.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
     override fun onCreateView(
-            inflater:   LayoutInflater,
+            inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
@@ -33,11 +39,20 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+
         super.onViewCreated(view, savedInstanceState)
-        var workoutList = mutableListOf<Workout>()
-        var workout = Workout("PETTO/BICIPITI")
-        var workout2 = Workout("SCHIENA/TRICIPITIAAAAAAAA")
-        var es1 = Exercise("SQUATAAAAAAAAAAAAAAA",2,10,120)
+        val currentUser = mAuth.currentUser
+        val idUser = currentUser?.uid
+
+        var mUserReference = FirebaseDatabase.getInstance().getReference("users")
+
+
+       var workoutList = ArrayList<Workout>()
+        var listAdapter =  ListAdapter(this.context, workoutList)
+       /* var workout = Workout("SPALLE")
+        var workout2 = Workout("SCHIENA-TRICIPITI")
+        var es1 = Exercise("SQUAT",2,10,120)
         var es2 = Exercise("PANCA PIANA",3,12,120)
         var es3 = Exercise("LEG CURL",5,4,120)
         var es4 = Exercise("LEG PRESS",2,10,120)
@@ -51,26 +66,74 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
             workout2.addExercise(es3)
             workout2.addExercise(es2)
 
-            workoutList.add(workout)
+
+            //workoutList.add(workout)
             workoutList.add(workout2)
         }catch (e  : ExerciseAlreadyInListException){
             Toast.makeText(this.context,"esercizio  gia presente in scheda",Toast.LENGTH_SHORT).show()
-        }
+        }*/
 
-        list_view_workouts.adapter= ListAdapter(this.context,workoutList)
-        list_view_workouts.setOnItemClickListener ( object : AdapterView.OnItemClickListener{
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                /*creare activity modifica* oppure ti porta a statistichs con la scheda selezionata*/
 
-                Log.d(null,"$position")
-                parent!!.getItemAtPosition(position)
-                var workout= parent!!.getItemAtPosition(position) as Workout
-                Log.d(null,"${workout.nome}")
+        mUserReference.child(idUser!!).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                Log.d(TAG, "\n \n \n ")
+                snapshot.children.forEach { workoutList.add(createWorkoutFromList(it) )  }
+                listAdapter.notifyDataSetChanged()
 
             }
 
-        } )
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("StartWorkloutFragment", "Failed to read value.", error.toException());
+            }
 
+        })
+
+
+
+
+      /* workoutList.forEach {
+
+            mUserReference.child(idUser!!).child(it.nome).setValue(it)
+        }*/
+
+
+
+        list_view_workouts.adapter= listAdapter
+        list_view_workouts.setOnItemClickListener(object : AdapterView.OnItemClickListener {
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                /*creare activity modifica* oppure ti porta a statistichs con la scheda selezionata*/
+
+                Log.d(null, "$position")
+                parent!!.getItemAtPosition(position)
+                var workout = parent!!.getItemAtPosition(position) as Workout
+                Log.d(null, "${workout.nome}")
+
+            }
+
+        })
+
+    }
+
+    private fun createWorkoutFromList(snapshot: DataSnapshot) : Workout {
+        var hashMap  = snapshot.value as HashMap<*, *>
+        var list = hashMap.values.toList()
+        var workout : Workout = Workout(list[1].toString())
+        var listOfExercise = list[0]  as ArrayList<*>
+
+
+        listOfExercise.forEach {
+
+            val map = it as HashMap<*,*>
+            val list = it.values.toList()
+            val nome = list[2] as String
+            val serie = list[1] as Long
+            val recupero = list[0] as Long
+            val ripetizioni = list [3] as Long
+            val exercise = Exercise(nome,serie.toInt(),ripetizioni.toInt(),recupero.toInt())
+            workout.addExercise(exercise)
+             }
+        Log.d(TAG, "$workout")
+        return workout
     }
 
 }
