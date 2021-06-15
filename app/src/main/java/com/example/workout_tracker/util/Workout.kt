@@ -2,6 +2,7 @@ package com.example.workout_tracker.util
 
 import android.provider.ContactsContract
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
+import com.example.workout_tracker.R
 import java.io.Serializable
 import java.lang.Exception
 import java.time.LocalDate.now
@@ -17,8 +18,8 @@ class Workout(var nome: String ) : Serializable{
 
            return exerciseList.add(exercise )
        }
-        throw ExerciseAlreadyInListException("Esercizio già presente nella scheda")
-        return false
+        throw ExerciseAlreadyInListException("Esercizio già presente")
+
     }
     fun removeExercise(exercise: Exercise):Boolean{
            return exerciseList.remove(exercise)

@@ -100,12 +100,11 @@ android:layout_height="fill_parent">
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_continua"
+            android:id="@+id/button_con"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
 
-            android:onClick="btnContinua"
             android:text="@string/continua"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +119,7 @@ android:layout_height="fill_parent">
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_continua" />
+            app:layout_constraintTop_toBottomOf="@+id/button_con" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

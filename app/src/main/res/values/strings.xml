@@ -20,4 +20,7 @@
     <string name="inserisci_un_valore">Inserisci un Valore</string>
     <string name="inserisci_esercizi">inserisci qui i tuoi esercizi</string>
     <string name="fatto">Fatto!</string>
+    <string name="riempi_campi">Riempi tutti i campi</string>
+    <string name="esercizio_gia_presente">Esercizio già presente</string>
+    <string name="allenamento_aggiunto">\"Allenamento aggiunto \"</string>
 </resources>

@@ -25,18 +25,25 @@ import com.example.workout_tracker.fragment.exercise.*
 import com.example.workout_tracker.fragment.food.AddFoodFragment
 import com.example.workout_tracker.fragment.food.FoodProfilefragment
 import com.example.workout_tracker.fragment.food.MacroChartFragment
+import com.example.workout_tracker.util.Workout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_workout.*
 import kotlinx.android.synthetic.main.fragment_addfood.*
 import kotlinx.android.synthetic.main.fragment_newtraining.*
 
 class MainActivity : AppCompatActivity() {
+    var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+    val currentUser = mAuth.currentUser
+    val idUser = currentUser?.uid
+    var mUserReference = FirebaseDatabase.getInstance().getReference("users")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -82,24 +89,31 @@ class MainActivity : AppCompatActivity() {
                 when(item.itemId){
                     R.id.statistics ->  supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<StatisticsFragment>(R.id.main_fragment)
+
                     }
                     R.id.new_workout ->supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<NewTrainingFragment>(R.id.main_fragment)
+
                     }
                     R.id.start_workout-> supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<StartWorkoutFragment>(R.id.main_fragment)
+
                     }
                     R.id.profile_exercise -> supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<ExerciseProfileFragment>(R.id.main_fragment)
+
                     }
                     R.id.macro_chart ->  supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<MacroChartFragment>(R.id.main_fragment)
+
                     }
                     R.id.add_food->  supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<AddFoodFragment>(R.id.main_fragment)
+
                     }
                     R.id.profile_food -> supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<FoodProfilefragment>(R.id.main_fragment)
+
                     }
 
 
@@ -108,11 +122,11 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-
         })
 
 
     }
+
     private fun changeMenu(menu : Int,defoultItem:Int){
         bottom_nav.inflateMenu(menu)
         bottom_nav.visibility=View.VISIBLE
@@ -133,117 +147,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun btnContinua( v:View){
-        val txtNomeWorkout = txt_nome_workout.text.toString()
-        val numeroEsercizi  = txt_numero_esercizi.text.toString()
-
-        if (txtNomeWorkout == ""){
-            txt_nome_workout.error = getString(R.string.inserisci_un_valore)
-        }else if (numeroEsercizi == ""){
-            txt_numero_esercizi.error =  getString(R.string.inserisci_un_valore)
-        }else{
-            Log.d(null,txtNomeWorkout)
-            Log.d(null,numeroEsercizi.toString())
-            txt_inserisci_esercizi.text = getString(R.string.inserisci_esercizi)
-            btn_continua.visibility = View.INVISIBLE
-
-            for(i in 0..numeroEsercizi.toInt()){
-                setSerieLayout(i)
-            }
-            val button : MaterialButton = MaterialButton(this,)
-
-            button.text = getString(R.string.fatto)
-            val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-            button.layoutParams = params
-           button.gravity = Gravity.CENTER_HORIZONTAL
-            button.textSize = 24f
-            button.setPadding(50)
-           // button.setOnClickListener {  }
-
-            linear_layout_add_exercise.addView(button)
-        }
-
-
+    public fun addWorkoutToFirebase(workout: Workout){
+        mUserReference.child(idUser!!).child(workout.nome).setValue(workout)
+        Toast.makeText(this,getString(R.string.allenamento_aggiunto),Toast.LENGTH_SHORT).show()
     }
-    fun setSerieLayout(i :Int){
-        var firstLinearLayout : LinearLayout = LinearLayout(this)
-        var linearLayout : LinearLayout = LinearLayout(this)
-        linear_layout_add_exercise.addView(firstLinearLayout)
-        linear_layout_add_exercise.addView(linearLayout)
 
-
-        var textView2: MaterialTextView =  MaterialTextView(this,)
-        textView2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, )
-        textView2.text="${i+1}° Esercizio"
-
-        textView2.gravity = Gravity.CENTER
-        textView2.textSize = 18f
-        textView2.typeface = Typeface.DEFAULT_BOLD
-
-        var textInputLayout = TextInputLayout(this)
-        textInputLayout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
-        textInputLayout.boxBackgroundColor = Color.TRANSPARENT
-
-        textInputLayout.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
-        textInputLayout.hint = "N°Serie"
-        textInputLayout.boxStrokeColor = Color.RED
-        textInputLayout
-
-        var editText = TextInputEditText(textInputLayout.context)
-
-        editText.inputType = (InputType.TYPE_CLASS_NUMBER )
-        editText.filters += InputFilter.LengthFilter(2)
-        textInputLayout.setPadding(25,0,25,0)
-        textInputLayout.addView(editText, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
-
-
-        var textInputLayout2 = TextInputLayout(this)
-        textInputLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1F)
-        textInputLayout2.boxStrokeColor = Color.RED
-        textInputLayout2.boxBackgroundColor = Color.TRANSPARENT
-        textInputLayout2.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
-        textInputLayout2.hint ="N°Rep"
-        var editText2 = TextInputEditText(textInputLayout2.context)
-        editText2.inputType = (InputType.TYPE_CLASS_NUMBER  )
-        editText2.filters += InputFilter.LengthFilter(3)
-
-        textInputLayout2.setPadding(25,0,25,0)
-        textInputLayout2.addView(editText2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
-
-        var textInputLayout3 = TextInputLayout(this)
-        textInputLayout3.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1F)
-        textInputLayout3.boxStrokeColor = Color.RED
-        textInputLayout3.boxBackgroundColor = Color.TRANSPARENT
-        textInputLayout3.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
-        textInputLayout3.hint ="Recupero"
-        var editText3 = TextInputEditText(textInputLayout3.context)
-        editText3.inputType = (InputType.TYPE_CLASS_NUMBER )
-        editText3.filters += InputFilter.LengthFilter(4)
-
-        textInputLayout3.setPadding(25,0,25,0)
-        textInputLayout3.addView(editText3, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
-
-        var textInputLayout4 = TextInputLayout(this)
-        textInputLayout4.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1F)
-        textInputLayout4.boxStrokeColor = Color.RED
-        textInputLayout4.boxBackgroundColor = Color.TRANSPARENT
-        textInputLayout4.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_FILLED
-        textInputLayout4.hint ="Nome esercizio"
-        var editText4 = TextInputEditText(textInputLayout4.context)
-
-        editText4.filters += InputFilter.LengthFilter(24)
-
-        textInputLayout4.setPadding(25,50,25,25)
-        textInputLayout4.addView(editText4, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
-
-
-
-        firstLinearLayout.addView(textView2)
-        firstLinearLayout.addView(textInputLayout4)
-        linearLayout.addView(textInputLayout)
-        linearLayout.addView(textInputLayout2)
-        linearLayout.addView(textInputLayout3)
-
-
-    }
 }
