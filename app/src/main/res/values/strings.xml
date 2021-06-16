@@ -23,4 +23,7 @@
     <string name="riempi_campi">Riempi tutti i campi</string>
     <string name="esercizio_gia_presente">Esercizio già presente</string>
     <string name="allenamento_aggiunto">\"Allenamento aggiunto \"</string>
+    <string name="vuoi_uscire">Vuoi Uscire?</string>
+    <string name="allenamento_verra_cancellato">L\'allenamento verra cancellato per sempre!</string>
+    <string name="progressi_persi">Tutti i tuoi progressi andranno persi!</string>
 </resources>

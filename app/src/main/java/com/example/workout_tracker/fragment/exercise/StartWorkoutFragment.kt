@@ -48,35 +48,12 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
         var mUserReference = FirebaseDatabase.getInstance().getReference("users")
 
 
-       var workoutList = ArrayList<Workout>()
+        var workoutList = ArrayList<Workout>()
         var listAdapter =  ListAdapter(this.context, workoutList)
-       /* var workout = Workout("SPALLE")
-        var workout2 = Workout("SCHIENA-TRICIPITI")
-        var es1 = Exercise("SQUAT",2,10,120)
-        var es2 = Exercise("PANCA PIANA",3,12,120)
-        var es3 = Exercise("LEG CURL",5,4,120)
-        var es4 = Exercise("LEG PRESS",2,10,120)
-        var es5 = Exercise("AFFONDI",2,10,120)
-        try {
-            workout.addExercise(es2)
-            workout.addExercise(es1)
-            workout.addExercise(es4)
-            workout.addExercise(es5)
-            workout.addExercise(es3)
-            workout2.addExercise(es3)
-            workout2.addExercise(es2)
-
-
-            //workoutList.add(workout)
-            workoutList.add(workout2)
-        }catch (e  : ExerciseAlreadyInListException){
-            Toast.makeText(this.context,"esercizio  gia presente in scheda",Toast.LENGTH_SHORT).show()
-        }*/
-
 
         mUserReference.child(idUser!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                workoutList.clear()
                 snapshot.children.forEach { workoutList.add(createWorkoutFromList(it) )  }
                 listAdapter.notifyDataSetChanged()
 
@@ -91,10 +68,6 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
 
 
-      /* workoutList.forEach {
-
-            mUserReference.child(idUser!!).child(it.nome).setValue(it)
-        }*/
 
 
 

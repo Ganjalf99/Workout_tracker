@@ -1,5 +1,7 @@
 package com.example.workout_tracker
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -10,7 +12,6 @@ import android.view.Gravity
 import android.widget.*
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginLeft
 import androidx.core.view.setPadding
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
@@ -18,6 +19,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_workout.*
 
 
@@ -26,6 +28,7 @@ class WorkoutActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout)
+
         var i=0;
         linear_layout_vertical.gravity = Gravity.CENTER
         val workout = intent.getSerializableExtra("Workout") as Workout
@@ -33,7 +36,7 @@ class WorkoutActivity : AppCompatActivity(){
         textViewNomeWorkout.paintFlags = textViewNomeWorkout.paintFlags or Paint.UNDERLINE_TEXT_FLAG
         workout.exerciseList.forEach {
                 i++
-            setExerciseNamelayout(i,it)
+            setExerciseNamelayout(i, it)
 
                 for ( i in 0 until it.serie){
                     setSerieLayout(i)
@@ -41,6 +44,16 @@ class WorkoutActivity : AppCompatActivity(){
         }
         setCompleteButton(workout)
 
+    }
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.vuoi_uscire)
+                .setMessage(getString(R.string.progressi_persi))
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes) { arg0, arg1 ->
+
+                    super.onBackPressed() }
+                .create().show()
     }
     fun btnFinishClick(workout: Workout) {
        /* Log.d(null, "lel")
@@ -52,7 +65,7 @@ class WorkoutActivity : AppCompatActivity(){
 
     }
     fun setCompleteButton(workout: Workout){
-        val button : MaterialButton = MaterialButton(this,)
+        val button : MaterialButton = MaterialButton(this)
 
         button.text = getString(R.string.fatto)
         val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -72,12 +85,12 @@ class WorkoutActivity : AppCompatActivity(){
         textView.typeface = Typeface.DEFAULT_BOLD
         linear_layout_vertical.addView(textView)
     }
-    fun setSerieLayout(i :Int){
+    fun setSerieLayout(i: Int){
         var linearLayout : LinearLayout = LinearLayout(this)
         linear_layout_vertical.addView(linearLayout)
 
 
-        var textView2: MaterialTextView =  MaterialTextView(this,)
+        var textView2: MaterialTextView =  MaterialTextView(this)
         textView2.text="${i+1}° Serie"
         textView2.setPadding(70)
         textView2.textSize = 18f
@@ -95,12 +108,12 @@ class WorkoutActivity : AppCompatActivity(){
 
         editText.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL)
         editText.filters += InputFilter.LengthFilter(4)
-        textInputLayout.setPadding(50,0,50,0)
+        textInputLayout.setPadding(50, 0, 50, 0)
         textInputLayout.addView(editText, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
 
         var textInputLayout2 = TextInputLayout(this)
-        textInputLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,1F)
+        textInputLayout2.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1F)
         textInputLayout2.boxStrokeColor = Color.RED
         textInputLayout2.boxBackgroundColor = Color.TRANSPARENT
         textInputLayout2.boxBackgroundMode =  TextInputLayout.BOX_BACKGROUND_OUTLINE
@@ -109,11 +122,11 @@ class WorkoutActivity : AppCompatActivity(){
         editText2.inputType = (InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL )
         editText2.filters += InputFilter.LengthFilter(6)
 
-        textInputLayout2.setPadding(50,0,50,0)
+        textInputLayout2.setPadding(50, 0, 50, 0)
         textInputLayout2.addView(editText2, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT))
 
         var checkBox :CheckBox = CheckBox(this)
-        checkBox.setPadding(50,0,0,0)
+        checkBox.setPadding(50, 0, 0, 0)
         checkBox.setOnClickListener {
             if(checkBox.isChecked){
                 linearLayout.setBackgroundColor(Color.GREEN)
