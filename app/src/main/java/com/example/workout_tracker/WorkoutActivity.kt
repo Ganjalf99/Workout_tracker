@@ -5,12 +5,14 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
 import android.view.Gravity
 import android.widget.*
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import com.example.workout_tracker.util.Exercise
@@ -77,11 +79,14 @@ class WorkoutActivity : AppCompatActivity(){
 
         linear_layout_vertical.addView(button)
     }
+    @RequiresApi(Build.VERSION_CODES.M)
     fun setExerciseNamelayout(i: Int, exercise: Exercise) {
         var textView: MaterialTextView =  MaterialTextView(this)
         textView.text="$i- ${exercise.nome}"
         textView.textSize = 24f
         textView.setPadding(24)
+
+        textView.setTextColor( resources.getColor(R.color.purple_500,null))
         textView.typeface = Typeface.DEFAULT_BOLD
         linear_layout_vertical.addView(textView)
     }

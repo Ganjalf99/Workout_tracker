@@ -3,6 +3,7 @@ package com.example.workout_tracker.fragment.exercise
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.example.workout_tracker.Exceptions.ExerciseAlreadyInListException
+import com.example.workout_tracker.MainActivity
 import com.example.workout_tracker.R
 import com.example.workout_tracker.adapter.ListAdapter
 import com.example.workout_tracker.util.Exercise
@@ -50,12 +54,17 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
         var workoutList = ArrayList<Workout>()
         var listAdapter =  ListAdapter(this.context, workoutList)
-
+        list_view_workouts.adapter= listAdapter
         mUserReference.child(idUser!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
                 workoutList.clear()
                 snapshot.children.forEach { workoutList.add(createWorkoutFromList(it) )  }
+
                 listAdapter.notifyDataSetChanged()
+
+
+
 
             }
 
@@ -71,7 +80,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
 
 
-        list_view_workouts.adapter= listAdapter
+
         list_view_workouts.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 /*creare activity modifica* oppure ti porta a statistichs con la scheda selezionata*/
@@ -105,7 +114,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
             val exercise = Exercise(nome,serie.toInt(),ripetizioni.toInt(),recupero.toInt())
             workout.addExercise(exercise)
              }
-        Log.d(TAG, "$workout")
+
         return workout
     }
 

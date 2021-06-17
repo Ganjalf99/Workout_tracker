@@ -41,8 +41,10 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
 
 
         var newView = convertView
+        newView = null
         if( newView== null){
             newView = LayoutInflater.from(context).inflate(R.layout.list_view_item, null)
+            Log.d("workoout", "lol")
         }
         if(newView != null){
 
@@ -87,6 +89,7 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
             var textView: TextView = TextView(this.context)
             textView.text = "${exercise.serie} x ${exercise.ripetizioni} ${exercise.nome}"
             textView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            Log.d("workoout", textView.text.toString())
             linearLayout.addView(textView)
 
         }
