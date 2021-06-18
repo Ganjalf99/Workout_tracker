@@ -5,27 +5,27 @@
     android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
+    android:layout_gravity="center"
     android:gravity="center_horizontal"
-    >
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
         android:text="@string/yours_workout"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp"/>
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/list_view_workouts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/trans"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
-        android:background="@color/trans"
         android:listSelector="@color/trans"
 
         />

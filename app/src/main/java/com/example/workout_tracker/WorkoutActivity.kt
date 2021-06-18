@@ -1,7 +1,7 @@
 package com.example.workout_tracker
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.*
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
@@ -9,12 +9,15 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.*
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
+import com.example.workout_tracker.Services.Timer
 import com.example.workout_tracker.util.Exercise
 import com.example.workout_tracker.util.Workout
 import com.google.android.material.button.MaterialButton
@@ -27,15 +30,18 @@ import kotlinx.android.synthetic.main.activity_workout.*
 
 class WorkoutActivity : AppCompatActivity(){
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_workout)
-
+        registerReceiver(uiUpdated,  IntentFilter("TIMER_UPDATED"));
+        startButton.setOnClickListener { onStartBtnClick() }
+        stopButton.setOnClickListener { onStopBtnClick()}
         var i=0;
         linear_layout_vertical.gravity = Gravity.CENTER
         val workout = intent.getSerializableExtra("Workout") as Workout
         textViewNomeWorkout.text = workout.nome
-        textViewNomeWorkout.paintFlags = textViewNomeWorkout.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        textViewNomeWorkout.paintFlags = textViewNomeWorkout.paintFlags
         workout.exerciseList.forEach {
                 i++
             setExerciseNamelayout(i, it)
@@ -46,6 +52,40 @@ class WorkoutActivity : AppCompatActivity(){
         }
         setCompleteButton(workout)
 
+    }
+    private var uiUpdated = object: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            //sistemare tempo
+            var time= intent!!.getIntExtra("timeS", 0)
+            Log.d(null, "$time")
+            textViewTimer.text = "${time/60}:${time%60}"
+        }
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(uiUpdated);
+    }
+     private fun onStartBtnClick(){
+         val time = textnumes.editText!!.text.toString()
+         val textViewTimer = textViewTimer.text.toString()
+        val intent = Intent(this, Timer::class.java)
+        if(textViewTimer == "0:0") {
+            if (time != "") {
+
+                intent.putExtra("time", time.toInt())
+                startService(intent)
+            }
+        }
+
+    }
+    private fun onStopBtnClick(){
+        val intent = Intent(this,Timer::class.java)
+        stopService(intent)
+
+        textViewTimer.text = "0:0"
     }
     override fun onBackPressed() {
         AlertDialog.Builder(this)
@@ -82,11 +122,11 @@ class WorkoutActivity : AppCompatActivity(){
     @RequiresApi(Build.VERSION_CODES.M)
     fun setExerciseNamelayout(i: Int, exercise: Exercise) {
         var textView: MaterialTextView =  MaterialTextView(this)
-        textView.text="$i- ${exercise.nome}"
+        textView.text=" ${exercise.nome}"
         textView.textSize = 24f
         textView.setPadding(24)
 
-        textView.setTextColor( resources.getColor(R.color.purple_500,null))
+        textView.setTextColor( resources.getColor(R.color.purple_200,null))
         textView.typeface = Typeface.DEFAULT_BOLD
         linear_layout_vertical.addView(textView)
     }
