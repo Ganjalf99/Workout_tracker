@@ -77,6 +77,13 @@ class MainActivity : AppCompatActivity() {
                         }
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
+                    R.id.nav_profile -> {
+                        bottom_nav.visibility = View.GONE//nascone il bottom menu
+                        supportFragmentManager.commit { setReorderingAllowed(true)
+                            replace<ExerciseProfileFragment>(R.id.main_fragment)
+                        }
+                        drawer_layout.closeDrawer(GravityCompat.START)
+                    }
                 }
                 return true
             }
@@ -99,10 +106,7 @@ class MainActivity : AppCompatActivity() {
                         replace<StartWorkoutFragment>(R.id.main_fragment)
 
                     }
-                    R.id.profile_exercise -> supportFragmentManager.commit { setReorderingAllowed(true)
-                        replace<ExerciseProfileFragment>(R.id.main_fragment)
 
-                    }
                     R.id.macro_chart ->  supportFragmentManager.commit { setReorderingAllowed(true)
                         replace<MacroChartFragment>(R.id.main_fragment)
 
@@ -111,10 +115,7 @@ class MainActivity : AppCompatActivity() {
                         replace<AddFoodFragment>(R.id.main_fragment)
 
                     }
-                    R.id.profile_food -> supportFragmentManager.commit { setReorderingAllowed(true)
-                        replace<FoodProfilefragment>(R.id.main_fragment)
 
-                    }
 
 
 

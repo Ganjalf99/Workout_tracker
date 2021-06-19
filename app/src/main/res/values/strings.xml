@@ -4,13 +4,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="add_workout_button">Add new Workout</string>
-    <string name="yours_workout">YOURS WORKOUTS</string>
+    <string name="yours_workout">I TUOI ALLENAMENTI</string>
     <string name="sign_in_with_google">Login with Google</string>
-    <string name="example">Exemple</string>
+    <string name="example">Esempio</string>
     <string name="id">ID:</string>
-    <string name="name">Name:</string>
-    <string name="email_address">Email address:</string>
-    <string name="sign_out">Sign Out</string>
+    <string name="name">Nome:</string>
+    <string name="email_address">Email :</string>
+    <string name="sign_out">Esci</string>
     <string name="inserisci_nome_workout">Inserisci Nome Workout</string>
     <string name="inserisci_numero_esercizi">Inserisci Numero Esercizi</string>
     <string name="es_allenamento_petto">Es: Allenamento Petto</string>
@@ -28,4 +28,15 @@
     <string name="progressi_persi">Tutti i tuoi progressi andranno persi!</string>
     <string name="ex_non_completato">Esercizio non completato</string>
     <string name="allenamento_salvato">Allenamento Salvato</string>
+    <string name="allenamento">Allenamento</string>
+    <string name="cibo">Cibo</string>
+    <string name="impostazioni">Impostazioni</string>
+    <string name="altro">Altro</string>
+    <string name="info">Info</string>
+    <string name="statistiche">Statistiche</string>
+    <string name="nuovo_allenamento">Nuovo Allenamento</string>
+    <string name="inizia_allenamento">Inizia Allenamento</string>
+    <string name="profilo">Profilo</string>
+    <string name="grafico_macro">Grafico Macro</string>
+    <string name="aggiungi_cibo">Aggiungi Cibo</string>
 </resources>

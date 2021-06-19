@@ -4,17 +4,14 @@
     <item
         android:id="@+id/macro_chart"
         android:icon="@drawable/ic_pie"
-        android:title="Macro Chart"/>
+        android:title="@string/grafico_macro"/>
     <item
         android:id="@+id/add_food"
         android:icon="@drawable/ic_addfood"
-        android:title="Add Food"/>
+        android:title="@string/aggiungi_cibo"/>
 
 
-    <item
-        android:id="@+id/profile_food"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"/>
+
 
 
 </menu>

@@ -6,24 +6,30 @@
         <item
             android:id="@+id/nav_exercise"
             android:icon="@drawable/ic_exercise"
-            android:title="Exercise"></item>
+            android:title="@string/allenamento"></item>
         <item
             android:id="@+id/nav_food"
             android:icon="@drawable/ic_diet"
-            android:title="Food"></item>
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="Settings"></item>
+            android:title="@string/cibo"></item>
+
 
     </group>
 
-    <item android:title="information">
+    <item android:title="@string/altro">
         <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_baseline_person_24"
+                android:title="@string/profilo"/>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/impostazioni"></item>
             <item
                 android:id="@+id/nav_info"
                 android:icon="@drawable/ic_info"
-                android:title="Info"></item>
+                android:title="@string/info"></item>
+
         </menu>
     </item>
 </menu>

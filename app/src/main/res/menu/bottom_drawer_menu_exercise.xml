@@ -4,22 +4,19 @@
     <item
         android:id="@+id/statistics"
         android:icon="@drawable/ic_bar_graph"
-        android:title="Statistics"/>
+        android:title="@string/statistiche"/>
     <item
         android:id="@+id/new_workout"
         android:icon="@drawable/ic_add_workout"
-        android:title="New Training"
+        android:title="@string/nuovo_allenamento"
         />
     <item
         android:id="@+id/start_workout"
         android:icon="@drawable/ic_baseline_not_started_24"
-        android:title="Start Workout"/>
+        android:title="@string/inizia_allenamento"/>
 
 
-    <item
-        android:id="@+id/profile_exercise"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"/>
+
 
 
 </menu>
