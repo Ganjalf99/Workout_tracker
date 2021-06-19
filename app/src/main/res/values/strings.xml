@@ -26,4 +26,6 @@
     <string name="vuoi_uscire">Vuoi Uscire?</string>
     <string name="allenamento_verra_cancellato">L\'allenamento verra cancellato per sempre!</string>
     <string name="progressi_persi">Tutti i tuoi progressi andranno persi!</string>
+    <string name="ex_non_completato">Esercizio non completato</string>
+    <string name="allenamento_salvato">Allenamento Salvato</string>
 </resources>

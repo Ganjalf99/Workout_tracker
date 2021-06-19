@@ -3,33 +3,41 @@ package com.example.workout_tracker
 import android.app.AlertDialog
 import android.content.*
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.text.InputType
+import android.text.style.TtsSpan
 import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.widget.*
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
+import com.example.workout_tracker.Exceptions.MissValueException
 import com.example.workout_tracker.Services.Timer
+import com.example.workout_tracker.util.Execution
 import com.example.workout_tracker.util.Exercise
+import com.example.workout_tracker.util.Tempo
 import com.example.workout_tracker.util.Workout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_workout.*
+import java.time.LocalDateTime
+import java.time.temporal.Temporal
+import java.util.*
 
 
 class WorkoutActivity : AppCompatActivity(){
-
+    var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+    val currentUser = mAuth.currentUser
+    val idUser = currentUser?.uid
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -53,59 +61,47 @@ class WorkoutActivity : AppCompatActivity(){
         setCompleteButton(workout)
 
     }
-    private var uiUpdated = object: BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            //sistemare tempo
-            var time= intent!!.getIntExtra("timeS", 0)
-            Log.d(null, "$time")
-            textViewTimer.text = "${time/60}:${time%60}"
-        }
 
 
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        unregisterReceiver(uiUpdated);
-    }
-     private fun onStartBtnClick(){
-         val time = textnumes.editText!!.text.toString()
-         val textViewTimer = textViewTimer.text.toString()
-        val intent = Intent(this, Timer::class.java)
-        if(textViewTimer == "0:0") {
-            if (time != "") {
-
-                intent.putExtra("time", time.toInt())
-                startService(intent)
-            }
-        }
-
-    }
-    private fun onStopBtnClick(){
-        val intent = Intent(this,Timer::class.java)
-        stopService(intent)
-
-        textViewTimer.text = "0:0"
-    }
-    override fun onBackPressed() {
-        AlertDialog.Builder(this)
-                .setTitle(R.string.vuoi_uscire)
-                .setMessage(getString(R.string.progressi_persi))
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes) { arg0, arg1 ->
-
-                    super.onBackPressed() }
-                .create().show()
-    }
     fun btnFinishClick(workout: Workout) {
-       /* Log.d(null, "lel")
-        var linearLayout = linear_layout_vertical.getChildAt(1) as LinearLayout
-        var textView = linearLayout.getChildAt(0) as TextView
-        Log.d(null, "${textView.text}")*/
-        
-       // workout.exerciseList[3].addExecution()
+        var i = 1
+        var mUserReference = FirebaseDatabase.getInstance().getReference("$idUser+${workout.nome}")
+
+        workout.exerciseList.forEach {
+            i++
+
+                for (j in 0 until it.serie){
+                    var linearLayout = linear_layout_vertical.getChildAt(i) as LinearLayout
+                    val textInputRep = linearLayout.getChildAt(1) as TextInputLayout
+                    val textInputKg = linearLayout.getChildAt(2) as TextInputLayout
+
+                    val nRep = textInputRep.editText!!.text.toString()
+                    val kg = textInputKg.editText!!.text.toString()
+                    if((nRep == "") or (kg == "")){
+                        Log.d(null,"esercizio non completo")
+                    }else{
+                        val c = Calendar.getInstance()
+                        val year = c.get(Calendar.YEAR)
+                        val month = c.get(Calendar.MONTH)
+                        val day = c.get(Calendar.DAY_OF_MONTH)
+                        val time = Tempo(day,month+1,year )
+                        val exe = Execution(time,j+1,nRep.toInt(),kg.toInt())
+                        Log.d(null,exe.toString())
+                        mUserReference.child(it.nome).push().setValue(exe)
+                    }
+                    i++
+                }
+
+
+
+        }
+        Toast.makeText(this,getString(R.string.allenamento_salvato),Toast.LENGTH_SHORT).show()
+        finish()
 
     }
+
+
     fun setCompleteButton(workout: Workout){
         val button : MaterialButton = MaterialButton(this)
 
@@ -185,6 +181,49 @@ class WorkoutActivity : AppCompatActivity(){
         linearLayout.addView(textInputLayout2)
         linearLayout.addView(checkBox)
 
+    }
+    private var uiUpdated = object: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            //sistemare tempo
+            var time= intent!!.getIntExtra("timeS", 0)
+            Log.d(null, "$time")
+            textViewTimer.text = "${time/60}:${time%60}"
+        }
+
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(uiUpdated);
+    }
+    private fun onStartBtnClick(){
+        val time = textnumes.editText!!.text.toString()
+        val textViewTimer = textViewTimer.text.toString()
+        val intent = Intent(this, Timer::class.java)
+        if(textViewTimer == "0:0") {
+            if (time != "") {
+
+                intent.putExtra("time", time.toInt())
+                startService(intent)
+            }
+        }
+
+    }
+    private fun onStopBtnClick(){
+        val intent = Intent(this,Timer::class.java)
+        stopService(intent)
+
+        textViewTimer.text = "0:0"
+    }
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.vuoi_uscire)
+                .setMessage(getString(R.string.progressi_persi))
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes) { arg0, arg1 ->
+
+                    super.onBackPressed() }
+                .create().show()
     }
 }
 

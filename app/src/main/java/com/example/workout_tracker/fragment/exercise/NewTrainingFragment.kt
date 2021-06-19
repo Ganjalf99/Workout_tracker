@@ -3,6 +3,7 @@ package com.example.workout_tracker.fragment.exercise
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.InputFilter
@@ -12,8 +13,10 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -59,6 +62,8 @@ class NewTrainingFragment: Fragment(R.layout.fragment_newtraining), View.OnClick
             Log.d(null, numeroEsercizi.toString())
             txt_inserisci_esercizi.text = getString(R.string.inserisci_esercizi)
             btnContinua.visibility = View.INVISIBLE
+            textNome.editText!!.isFocusable = false
+            textnumes.editText!!.isFocusable =false
 
             for(i in 0 until numeroEsercizi.toInt()){
                 setSerieLayout(i)
@@ -66,6 +71,7 @@ class NewTrainingFragment: Fragment(R.layout.fragment_newtraining), View.OnClick
             addbutton()
         }
     }
+
 
     fun addbutton(){
         val button : MaterialButton = MaterialButton(requireActivity())
@@ -78,6 +84,7 @@ class NewTrainingFragment: Fragment(R.layout.fragment_newtraining), View.OnClick
         button.setPadding(50)
          button.setOnClickListener {
             try {
+
                 var workout = Workout(txtNomeWorkout)
                 for (i in 0 until (numeroEsercizi.toInt()*2) step 2){
                     Log.d(null, "$i \n")

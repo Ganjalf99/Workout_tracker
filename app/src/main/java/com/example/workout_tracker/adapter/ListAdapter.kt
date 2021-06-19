@@ -70,7 +70,9 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
                     .setTitle(context!!.getString(R.string.vuoi_uscire))
                     .setMessage(context.getString(R.string.allenamento_verra_cancellato))
                     .setNegativeButton(android.R.string.no, null)
-                    .setPositiveButton(android.R.string.yes) { arg0, arg1 -> mUserReference.child(idUser!!).child(data[position].nome).removeValue() }.create().show()
+                    .setPositiveButton(android.R.string.yes) { arg0, arg1 -> mUserReference.child(idUser!!).child(data[position].nome).removeValue()
+                        FirebaseDatabase.getInstance().getReference("$idUser+${data[position].nome}").removeValue()
+                    }.create().show()
 
 
         }
