@@ -39,4 +39,6 @@
     <string name="profilo">Profilo</string>
     <string name="grafico_macro">Grafico Macro</string>
     <string name="aggiungi_cibo">Aggiungi Cibo</string>
+    <string name="inserisci_un_valore_valido">Inserisci un valore valido</string>
+    <string name="seleziona_un_allenamento_per_visualizzare_le_statistiche">Seleziona un allenamento per visualizzare le statistiche</string>
 </resources>

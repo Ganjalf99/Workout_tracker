@@ -57,6 +57,8 @@ class NewTrainingFragment: Fragment(R.layout.fragment_newtraining), View.OnClick
             txt_nome_workout.error = getString(R.string.inserisci_un_valore)
         }else if (numeroEsercizi == ""){
             txt_numero_esercizi.error =  getString(R.string.inserisci_un_valore)
+        }else if (numeroEsercizi.toInt() <= 0){
+            txt_numero_esercizi.error =  getString(R.string.inserisci_un_valore_valido)
         }else{
             Log.d(null, txtNomeWorkout)
             Log.d(null, numeroEsercizi.toString())

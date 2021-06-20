@@ -83,11 +83,13 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
         list_view_workouts.setOnItemClickListener(object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                /*creare activity modifica* oppure ti porta a statistichs con la scheda selezionata*/
+                /* ti porta a statistichs con la scheda selezionata*/
 
                 Log.d(null, "$position")
                 parent!!.getItemAtPosition(position)
                 var workout = parent!!.getItemAtPosition(position) as Workout
+                val act =activity as MainActivity
+                act.showWorkoutStatistics(workout)
                 Log.d(null, "${workout.nome}")
 
             }
