@@ -6,6 +6,7 @@
     <string name="add_workout_button">Add new Workout</string>
     <string name="yours_workout">I TUOI ALLENAMENTI</string>
     <string name="sign_in_with_google">Login with Google</string>
+    <string name="sign_in_with_facebook">Login with Facebook</string>
     <string name="example">Esempio</string>
     <string name="id">ID:</string>
     <string name="name">Nome:</string>
@@ -41,4 +42,6 @@
     <string name="aggiungi_cibo">Aggiungi Cibo</string>
     <string name="inserisci_un_valore_valido">Inserisci un valore valido</string>
     <string name="seleziona_un_allenamento_per_visualizzare_le_statistiche">Seleziona un allenamento per visualizzare le statistiche</string>
+    <string name="facebook_app_id">929307310954185</string> <string name="fb_login_protocol_scheme">fb929307310954185</string>
+
 </resources>

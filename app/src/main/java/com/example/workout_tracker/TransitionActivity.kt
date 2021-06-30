@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.workout_tracker.fragment.exercise.ExerciseProfileFragment
+import com.facebook.FacebookSdk
 import com.google.firebase.auth.FirebaseAuth
 
 class TransitionActivity : AppCompatActivity() {
@@ -15,6 +16,8 @@ class TransitionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.transition_activty)
+
+        FacebookSdk.sdkInitialize(applicationContext);
 
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser

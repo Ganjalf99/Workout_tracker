@@ -12,7 +12,7 @@
         android:id="@+id/welcome_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,5 +35,34 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         android:drawableLeft="@drawable/ic_google" />
+
+    <Button
+        android:id="@+id/buttonFacebookLogin"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/com_facebook_button_background_color"
+        android:drawableLeft="@drawable/ic_iconfinder_317727_facebook_social_media_social_icon"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="@string/sign_in_with_facebook"
+        android:textAllCaps="false"
+
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/sign_in_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+
+        android:id="@+id/imageView"
+        android:layout_width="253dp"
+        android:layout_height="255dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_imageView"
+        app:srcCompat="@mipmap/ic_omino"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
