@@ -70,6 +70,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
+                    R.id.nav_info -> {
+                       Toast.makeText(applicationContext,getString(R.string.app_version),Toast.LENGTH_SHORT).show()
+                    }
                 }
                 return true
             }

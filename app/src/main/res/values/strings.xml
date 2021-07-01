@@ -43,5 +43,9 @@
     <string name="inserisci_un_valore_valido">Inserisci un valore valido</string>
     <string name="seleziona_un_allenamento_per_visualizzare_le_statistiche">Seleziona un allenamento per visualizzare le statistiche</string>
     <string name="facebook_app_id">929307310954185</string> <string name="fb_login_protocol_scheme">fb929307310954185</string>
+    <string name="nome_evento">Nome Evento</string>
+    <string name="descrizione">Descrizione</string>
+    <string name="calendario">Calendario</string>
+    <string name="app_version">Versione app : 1.0.0</string>
 
 </resources>
