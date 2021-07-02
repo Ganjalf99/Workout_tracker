@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">Workout Tracker</string>
-    <string name="email">colombaniemanueke@gmail.com</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="add_workout_button">Add new Workout</string>
+    <string name="email" translatable="false">colombaniemanueke@gmail.com</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="add_workout_button">Aggiungi nuovo allenamento</string>
     <string name="yours_workout">I TUOI ALLENAMENTI</string>
-    <string name="sign_in_with_google">Login with Google</string>
-    <string name="sign_in_with_facebook">Login with Facebook</string>
+    <string name="sign_in_with_google" translatable="false">Login with Google</string>
+    <string name="sign_in_with_facebook" translatable="false">Login with Facebook</string>
     <string name="example">Esempio</string>
-    <string name="id">ID:</string>
+    <string name="id" translatable="false">ID:</string>
     <string name="name">Nome:</string>
-    <string name="email_address">Email :</string>
+    <string name="email_address" translatable="false">Email :</string>
     <string name="sign_out">Esci</string>
+    <string name="serie">Serie</string>
     <string name="inserisci_nome_workout">Inserisci Nome Workout</string>
     <string name="inserisci_numero_esercizi">Inserisci Numero Esercizi</string>
     <string name="es_allenamento_petto">Es: Allenamento Petto</string>
@@ -20,10 +21,8 @@
     <string name="errore_inserisci_numero_esercizi">Inserisci il numero degli esercizi</string>
     <string name="inserisci_un_valore">Inserisci un Valore</string>
     <string name="inserisci_esercizi">inserisci qui i tuoi esercizi</string>
-    <string name="fatto">Fatto!</string>
     <string name="riempi_campi">Riempi tutti i campi</string>
-    <string name="esercizio_gia_presente">Esercizio già presente</string>
-    <string name="allenamento_aggiunto">\"Allenamento aggiunto \"</string>
+    <string name="allenamento_aggiunto">Allenamento aggiunto</string>
     <string name="vuoi_uscire">Vuoi Uscire?</string>
     <string name="allenamento_verra_cancellato">L\'allenamento verra cancellato per sempre!</string>
     <string name="progressi_persi">Tutti i tuoi progressi andranno persi!</string>
@@ -33,7 +32,7 @@
     <string name="cibo">Cibo</string>
     <string name="impostazioni">Impostazioni</string>
     <string name="altro">Altro</string>
-    <string name="info">Info</string>
+    <string name="info" translatable="false">Info</string>
     <string name="statistiche">Statistiche</string>
     <string name="nuovo_allenamento">Nuovo Allenamento</string>
     <string name="inizia_allenamento">Inizia Allenamento</string>
@@ -42,10 +41,21 @@
     <string name="aggiungi_cibo">Aggiungi Cibo</string>
     <string name="inserisci_un_valore_valido">Inserisci un valore valido</string>
     <string name="seleziona_un_allenamento_per_visualizzare_le_statistiche">Seleziona un allenamento per visualizzare le statistiche</string>
-    <string name="facebook_app_id">929307310954185</string> <string name="fb_login_protocol_scheme">fb929307310954185</string>
+    <string name="facebook_app_id" translatable="false">929307310954185</string> <string name="fb_login_protocol_scheme" translatable="false">fb929307310954185</string>
     <string name="nome_evento">Nome Evento</string>
     <string name="descrizione">Descrizione</string>
     <string name="calendario">Calendario</string>
     <string name="app_version">Versione app : 1.0.0</string>
+    <string name="esercizio_gia_presente">Esercizio già presente</string>
+    <string name="n_rep" translatable="false">N°Rep</string>
+    <string name="kh">Kg</string>
+    <string name="nSerie">N°Serie</string>
+    <string name="recupero">Recupero</string>
+    <string name="nome_eserciizo">Nome esercizio</string>
+    <string name="auth_fail">Autenticazione Fallita</string>
+    <string name="exercise">Esercizio</string>
+    <string name="ins_nome">Inserisci un Nome</string>
+    <string name="no_app_support">Non ci sono app che supportano questa azione</string>
+    <string name="seleziona_un_allenamento_per_vedere_le_statistiche">Seleziona un Allenamento per vedere le statistiche</string>
 
 </resources>

@@ -24,11 +24,11 @@ class TransitionActivity : AppCompatActivity() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if(user != null){
+            if (user != null) {
                 val dashboardIntent = Intent(this, MainActivity::class.java)
                 startActivity(dashboardIntent)
                 finish()
-            }else{
+            } else {
                 val signInIntent = Intent(this, LoginActivity::class.java)
                 startActivity(signInIntent)
                 finish()

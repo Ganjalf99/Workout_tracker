@@ -9,11 +9,11 @@ import android.util.Log
 import com.example.workout_tracker.R
 
 
-class Timer : Service(){
-    private lateinit var  countDownTimer: CountDownTimer
+class Timer : Service() {
+    private lateinit var countDownTimer: CountDownTimer
     private var time = 0
 
-    private lateinit var  mediaPlayer : MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
     override fun onBind(intent: Intent?): IBinder? {
 
         return null
@@ -27,15 +27,15 @@ class Timer : Service(){
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        time= intent!!.getIntExtra("time", 0)
+        time = intent!!.getIntExtra("time", 0)
 
-         countDownTimer =object : CountDownTimer(time.toLong()*1000, 1000) {
+        countDownTimer = object : CountDownTimer(time.toLong() * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
                 val i = Intent("TIMER_UPDATED")
                 time -= 1
                 Log.d(null, "$time")
-                if (time == 5){
+                if (time == 5) {
                     mediaPlayer.start()
                 }
                 i.putExtra("timeS", time)

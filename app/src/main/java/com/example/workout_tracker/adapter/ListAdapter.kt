@@ -19,8 +19,8 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.list_view_item.*
 
 
-class ListAdapter(private val context: Context?, private val data: ArrayList<Workout>): BaseAdapter() {
-    var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+class ListAdapter(private val context: Context?, private val data: ArrayList<Workout>) : BaseAdapter() {
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     val currentUser = mAuth.currentUser
     val idUser = currentUser?.uid
@@ -34,7 +34,7 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
     }
 
     override fun getItemId(position: Int): Long {
-        return  position.toLong()
+        return position.toLong()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
@@ -42,22 +42,22 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
 
         var newView = convertView
         newView = null
-        if( newView== null){
+        if (newView == null) {
             newView = LayoutInflater.from(context).inflate(R.layout.list_view_item, null)
             Log.d("workoout", "lol")
         }
-        if(newView != null){
+        if (newView != null) {
 
-            val txtNomeWorkout: TextView= newView.findViewById(R.id.txtNomeWorkout)
-           // val txtLastDate: TextView= newView.findViewById(R.id.txtLastDate)
+            val txtNomeWorkout: TextView = newView.findViewById(R.id.txtNomeWorkout)
+            // val txtLastDate: TextView= newView.findViewById(R.id.txtLastDate)
             //txtLastDate.text = data[position].lastRun.toString()
-            txtNomeWorkout.text =data[position].nome
+            txtNomeWorkout.text = data[position].nome
         }
 
         fillWorkout(position, newView)
 
-        val btn : ImageButton = newView!!.findViewById(R.id.imageButton2)
-        val btn2 : ImageButton = newView!!.findViewById(R.id.imageButton3)
+        val btn: ImageButton = newView!!.findViewById(R.id.imageButton2)
+        val btn2: ImageButton = newView!!.findViewById(R.id.imageButton3)
         btn.setOnClickListener {
             Log.d(null, "bottone avvio $position")
             val intent = Intent(context, WorkoutActivity::class.java)
@@ -70,7 +70,8 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
                     .setTitle(context!!.getString(R.string.vuoi_uscire))
                     .setMessage(context.getString(R.string.allenamento_verra_cancellato))
                     .setNegativeButton(android.R.string.no, null)
-                    .setPositiveButton(android.R.string.yes) { arg0, arg1 -> mUserReference.child(idUser!!).child(data[position].nome).removeValue()
+                    .setPositiveButton(android.R.string.yes) { arg0, arg1 ->
+                        mUserReference.child(idUser!!).child(data[position].nome).removeValue()
                         FirebaseDatabase.getInstance().getReference("$idUser+${data[position].nome}").removeValue()
                     }.create().show()
 
@@ -83,8 +84,9 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
 
         return newView
     }
-    private fun fillWorkout(position: Int, newView: View?){
-        val  linearLayout :LinearLayout =  newView!!.findViewById(R.id.linear_layout)
+
+    private fun fillWorkout(position: Int, newView: View?) {
+        val linearLayout: LinearLayout = newView!!.findViewById(R.id.linear_layout)
 
         data[position].exerciseList.forEach { exe ->
             var exercise: Exercise = exe

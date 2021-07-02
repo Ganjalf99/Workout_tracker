@@ -20,16 +20,17 @@ import com.google.firebase.auth.FacebookAuthProvider
 import kotlinx.android.synthetic.main.fragment_exerciseprofile.*
 
 
-class ExerciseProfileFragment: Fragment(R.layout.fragment_exerciseprofile){
+class ExerciseProfileFragment : Fragment(R.layout.fragment_exerciseprofile) {
 
-    private lateinit var mAuth : FirebaseAuth
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAuth = FirebaseAuth.getInstance()
@@ -45,12 +46,11 @@ class ExerciseProfileFragment: Fragment(R.layout.fragment_exerciseprofile){
             mAuth.signOut()
             LoginManager.getInstance().logOut()
             GoogleSignIn.getClient(
-                activity as Activity, GoogleSignInOptions.Builder(
+                    activity as Activity, GoogleSignInOptions.Builder(
                     GoogleSignInOptions.DEFAULT_SIGN_IN
-                ).build()
+            ).build()
             )
-                .signOut()
-
+                    .signOut()
 
 
             val intent = Intent(context, LoginActivity::class.java)

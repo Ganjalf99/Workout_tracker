@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.example.workout_tracker.R
 
-class MacroChartFragment: Fragment(R.layout.fragment_macrochart){
+class MacroChartFragment : Fragment(R.layout.fragment_macrochart) {
 
     override fun onCreateView(
-            inflater:   LayoutInflater,
+            inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {

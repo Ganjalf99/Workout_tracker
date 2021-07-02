@@ -16,14 +16,14 @@ import kotlinx.android.synthetic.main.fragment_settings.*
 import java.util.*
 
 
-class SettingsFragment: Fragment(R.layout.fragment_settings),View.OnClickListener{
+class SettingsFragment : Fragment(R.layout.fragment_settings), View.OnClickListener {
     var calendar = Calendar.getInstance()
-    lateinit var btn : MaterialButton
-    lateinit var cal : CalendarView
+    lateinit var btn: MaterialButton
+    lateinit var cal: CalendarView
 
-    var curDate :Int = calendar.get(Calendar.DAY_OF_MONTH);
-    var Year : Int = calendar.get(Calendar.YEAR);
-    var Month : Int= calendar.get(Calendar.MONTH);
+    var curDate: Int = calendar.get(Calendar.DAY_OF_MONTH);
+    var Year: Int = calendar.get(Calendar.YEAR);
+    var Month: Int = calendar.get(Calendar.MONTH);
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var v = inflater.inflate(R.layout.fragment_settings, container, false)
         btn = v.findViewById(R.id.btn)
@@ -32,7 +32,7 @@ class SettingsFragment: Fragment(R.layout.fragment_settings),View.OnClickListene
         return v
     }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cal.setOnDateChangeListener(object : CalendarView.OnDateChangeListener {
             override fun onSelectedDayChange(view: CalendarView, year: Int, month: Int, dayOfMonth: Int) {
@@ -48,13 +48,13 @@ class SettingsFragment: Fragment(R.layout.fragment_settings),View.OnClickListene
     }
 
     override fun onClick(v: View?) {
-        if (InputTitle.editText!!.text.toString().isNotEmpty() && InputDescription.editText!!.text.toString().isNotEmpty()){
+        if (InputTitle.editText!!.text.toString().isNotEmpty()) {
             val beginTime = Calendar.getInstance()
-            beginTime.set(Year, Month, curDate, );
+            beginTime.set(Year, Month, curDate);
 
 
             val endTime = Calendar.getInstance()
-            endTime.set(Year, Month, curDate, );
+            endTime.set(Year, Month, curDate);
 
             val intent = Intent(Intent.ACTION_INSERT)
             intent.data = CalendarContract.Events.CONTENT_URI;
@@ -63,14 +63,14 @@ class SettingsFragment: Fragment(R.layout.fragment_settings),View.OnClickListene
             intent.putExtra(CalendarContract.Events.ALL_DAY, true);
             intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.timeInMillis);
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.timeInMillis);
-            if(context?.let { it1 -> intent.resolveActivity(it1.packageManager) } != null){
+            if (context?.let { it1 -> intent.resolveActivity(it1.packageManager) } != null) {
                 startActivity(intent);
-            }else{
-                Toast.makeText(context, "There is no app that support this action", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, getString(R.string.no_app_support), Toast.LENGTH_SHORT).show();
             }
-        }else{
-            Toast.makeText(context, "",
-                    Toast.LENGTH_SHORT).show();
+        } else {
+            InputTitle!!.editText!!.error = getString(R.string.ins_nome)
+
         }
     }
 

@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_statistics.*
 
-class StatisticsFragment: Fragment(R.layout.fragment_statistics){
-    var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val currentUser = mAuth.currentUser
     val idUser = currentUser?.uid
     override fun onCreateView(
@@ -23,7 +23,7 @@ class StatisticsFragment: Fragment(R.layout.fragment_statistics){
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_statistics, container, false);    }
+        return inflater.inflate(R.layout.fragment_statistics, container, false); }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,20 +31,22 @@ class StatisticsFragment: Fragment(R.layout.fragment_statistics){
 
     fun showWorkoutStatistics(workout: Workout) {
         textViewInfo.text = workout.nome
-        var str =""
+        textViewInfo.textSize = 40F
+        var str = ""
         var mUserReference = FirebaseDatabase.getInstance().getReference("$idUser+${workout.nome}")
 
         workout.exerciseList.forEach {
 
             mUserReference.child(it.nome).get().addOnSuccessListener {
-                it.key?.let { it1 -> Log.d(null, it1)
+                it.key?.let { it1 ->
+                    Log.d(null, it1)
                     str += "\n${it1.toUpperCase()} \n"
                 }
-             it.children.forEach {
-                 val exe =  it.getValue(Execution::class.java)
-                 str += "${exe.toString()} \n"
-                Log.d(null, exe.toString() )
-             }
+                it.children.forEach {
+                    val exe = it.getValue(Execution::class.java)
+                    str += "${exe.toString()} \n"
+                    Log.d(null, exe.toString())
+                }
                 textViewstats.text = str
             }
         }

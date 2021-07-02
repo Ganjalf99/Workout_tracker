@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.example.workout_tracker.R
 
-class FoodProfilefragment: Fragment(R.layout.fragment_foodprofile){
+class FoodProfilefragment : Fragment(R.layout.fragment_foodprofile) {
 
     override fun onCreateView(
-            inflater:   LayoutInflater,
+            inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {

@@ -10,9 +10,9 @@
         android:id="@+id/textViewInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="@string/seleziona_un_allenamento_per_vedere_le_statistiche"
         android:textStyle="italic"
-        android:textSize="40sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

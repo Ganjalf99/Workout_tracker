@@ -32,7 +32,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 
-class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
+class StartWorkoutFragment : Fragment(R.layout.fragment_startworkout) {
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -43,7 +43,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+        var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
         super.onViewCreated(view, savedInstanceState)
         val currentUser = mAuth.currentUser
@@ -53,17 +53,15 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
 
         var workoutList = ArrayList<Workout>()
-        var listAdapter =  ListAdapter(this.context, workoutList)
-        list_view_workouts.adapter= listAdapter
+        var listAdapter = ListAdapter(this.context, workoutList)
+        list_view_workouts.adapter = listAdapter
         mUserReference.child(idUser!!).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 workoutList.clear()
-                snapshot.children.forEach { workoutList.add(createWorkoutFromList(it) )  }
+                snapshot.children.forEach { workoutList.add(createWorkoutFromList(it)) }
 
                 listAdapter.notifyDataSetChanged()
-
-
 
 
             }
@@ -88,7 +86,7 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
                 Log.d(null, "$position")
                 parent!!.getItemAtPosition(position)
                 var workout = parent!!.getItemAtPosition(position) as Workout
-                val act =activity as MainActivity
+                val act = activity as MainActivity
                 act.showWorkoutStatistics(workout)
                 Log.d(null, "${workout.nome}")
 
@@ -98,24 +96,24 @@ class StartWorkoutFragment: Fragment(R.layout.fragment_startworkout){
 
     }
 
-    private fun createWorkoutFromList(snapshot: DataSnapshot) : Workout {
-        var hashMap  = snapshot.value as HashMap<*, *>
+    private fun createWorkoutFromList(snapshot: DataSnapshot): Workout {
+        var hashMap = snapshot.value as HashMap<*, *>
         var list = hashMap.values.toList()
-        var workout : Workout = Workout(list[1].toString())
-        var listOfExercise = list[0]  as ArrayList<*>
+        var workout: Workout = Workout(list[1].toString())
+        var listOfExercise = list[0] as ArrayList<*>
 
 
         listOfExercise.forEach {
 
-            val map = it as HashMap<*,*>
+            val map = it as HashMap<*, *>
             val list = it.values.toList()
             val nome = list[2] as String
             val serie = list[1] as Long
             val recupero = list[0] as Long
-            val ripetizioni = list [3] as Long
-            val exercise = Exercise(nome,serie.toInt(),ripetizioni.toInt(),recupero.toInt())
+            val ripetizioni = list[3] as Long
+            val exercise = Exercise(nome, serie.toInt(), ripetizioni.toInt(), recupero.toInt())
             workout.addExercise(exercise)
-             }
+        }
 
         return workout
     }

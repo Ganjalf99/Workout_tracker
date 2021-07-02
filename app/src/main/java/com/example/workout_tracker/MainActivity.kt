@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_statistics.*
 
 
 class MainActivity : AppCompatActivity() {
-    var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+    var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     val currentUser = mAuth.currentUser
     val idUser = currentUser?.uid
     var mUserReference = FirebaseDatabase.getInstance().getReference("users")
@@ -40,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         //val bottomlistener = BottomListener()
         //all 'avvio dell'app mi posiziono sullo start workout
         bottom_nav.selectedItemId = R.id.new_workout
-        supportFragmentManager.commit { setReorderingAllowed(true)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
             replace<NewTrainingFragment>(R.id.main_fragment)
         }
         //listener per il drawer menu
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                         drawer_layout.closeDrawer(GravityCompat.START)
                     }
                     R.id.nav_info -> {
-                       Toast.makeText(applicationContext,getString(R.string.app_version),Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, getString(R.string.app_version), Toast.LENGTH_SHORT).show()
                     }
                 }
                 return true
@@ -120,41 +121,42 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun changeMenu(menu: Int, defoultItem: Int){
+    private fun changeMenu(menu: Int, defoultItem: Int) {
         bottom_nav.inflateMenu(menu)
-        bottom_nav.visibility=View.VISIBLE
+        bottom_nav.visibility = View.VISIBLE
         drawer_layout.closeDrawer((GravityCompat.START))
         bottom_nav.selectedItemId = defoultItem
     }
 
 
     //se fa indietro ma è aperto il drawer chiude il drower non l'activity
-    override  fun  onBackPressed(){
-        if(drawer_layout.isDrawerOpen(GravityCompat.START)) {
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
 
             drawer_layout.closeDrawer(GravityCompat.START)
-        }else{
+        } else {
             super.onBackPressed()
         }
 
 
     }
 
-    public fun addWorkoutToFirebase(workout: Workout){
+    public fun addWorkoutToFirebase(workout: Workout) {
         mUserReference.child(idUser!!).child(workout.nome).setValue(workout)
         Toast.makeText(this, getString(R.string.allenamento_aggiunto), Toast.LENGTH_SHORT).show()
     }
 
-    fun showWorkoutStatistics(workout: Workout){
+    fun showWorkoutStatistics(workout: Workout) {
         bottom_nav.selectedItemId = R.id.statistics
-
-        object : CountDownTimer(200, 100) {
+        //fixare
+        object : CountDownTimer(100, 100) {
             override fun onTick(millisUntilFinished: Long) {
 
             }
 
             override fun onFinish() {
-                val m =supportFragmentManager.findFragmentById(R.id.main_fragment) as StatisticsFragment
+
+                val m = supportFragmentManager.findFragmentById(R.id.main_fragment) as StatisticsFragment
                 m.showWorkoutStatistics(workout)
             }
         }.start()
