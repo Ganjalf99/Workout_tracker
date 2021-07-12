@@ -45,7 +45,7 @@
     <string name="nome_evento">Nome Evento</string>
     <string name="descrizione">Descrizione</string>
     <string name="calendario">Calendario</string>
-    <string name="app_version">Versione app : 1.0.0</string>
+    <string name="app_version">Versione app : 1.0.1</string>
     <string name="esercizio_gia_presente">Esercizio già presente</string>
     <string name="n_rep" translatable="false">N°Rep</string>
     <string name="kh">Kg</string>

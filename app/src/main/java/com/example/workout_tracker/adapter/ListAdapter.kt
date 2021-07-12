@@ -49,8 +49,6 @@ class ListAdapter(private val context: Context?, private val data: ArrayList<Wor
         if (newView != null) {
 
             val txtNomeWorkout: TextView = newView.findViewById(R.id.txtNomeWorkout)
-            // val txtLastDate: TextView= newView.findViewById(R.id.txtLastDate)
-            //txtLastDate.text = data[position].lastRun.toString()
             txtNomeWorkout.text = data[position].nome
         }
 
